@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -102,5 +103,10 @@ public class BasePage extends PageGenerator {
         } catch (AWTException e) {
             e.printStackTrace();
         }
+    }
+
+    public <T> void moveCursorToElement(T elementLocation) {
+        Actions action = new Actions(this.driver);
+        action.moveToElement((WebElement) elementLocation).perform();
     }
 }

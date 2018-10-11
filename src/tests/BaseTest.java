@@ -8,6 +8,8 @@ import org.testng.annotations.BeforeMethod;
 import pages.MainPage;
 import pages.PageGenerator;
 
+import java.util.concurrent.TimeUnit;
+
 public class BaseTest {
 
     public WebDriver driver;
@@ -18,6 +20,7 @@ public class BaseTest {
     public void setup() {
         driver = new ChromeDriver();
         wait = new WebDriverWait(driver, 15);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         page = new PageGenerator(driver);
         page.GetInstance(MainPage.class).goToMainPage();
@@ -25,7 +28,7 @@ public class BaseTest {
 
     @AfterMethod
     public void teardown() throws InterruptedException {
-        Thread.sleep(3000);
+        Thread.sleep(1000);
         driver.quit();
     }
 }

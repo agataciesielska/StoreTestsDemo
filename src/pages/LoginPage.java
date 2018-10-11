@@ -1,6 +1,5 @@
 package pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -34,7 +33,7 @@ public class LoginPage extends BasePage{
     WebElement createAccountButton;
 
     @FindBy(css = "ol li")
-    WebElement ErrorMessage;
+    WebElement errorMessage;
 
     @FindBy(className = "info-account")
     WebElement validLoginMessage;
@@ -56,7 +55,7 @@ public class LoginPage extends BasePage{
     }
 
     public void verifyInvalidLogin(String expectedText) {
-        Assert.assertEquals(readText(ErrorMessage), expectedText);
+        Assert.assertEquals(readText(errorMessage), expectedText);
     }
 
     public void createAccountEmail(int length) {
@@ -67,7 +66,7 @@ public class LoginPage extends BasePage{
     }
 
     public void verifyInvalidCreateAccount(String expectedText) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("ol li")));
+        wait.until(ExpectedConditions.visibilityOf(errorMessage));
         Assert.assertEquals(readText(createAccountErrorMessage), expectedText);
 
     }

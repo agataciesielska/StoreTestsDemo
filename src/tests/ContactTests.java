@@ -45,7 +45,7 @@ public class ContactTests extends BaseTest {
     }
 
     @Test
-    public void validFileUpload() throws InterruptedException {
+    public void validFileUpload() {
         page.GetInstance(ContactPage.class).fileUpload("C:\\testFile.txt");
 
         //**********Assertions**********

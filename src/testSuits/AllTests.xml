@@ -1,10 +1,23 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="All Tests" parallel="classes" thread-count="2">
-    <test name="All Tests">
+<suite name="All Tests">
+    <test name="Contact Tests">
         <classes>
             <class name="tests.ContactTests"/>
+        </classes>
+    </test>
+    <test name="Login Tests">
+        <classes>
             <class name="tests.LoginTests"/>
+        </classes>
+    </test>
+    <test name="Create Account Tests">
+        <classes>
             <class name="tests.CreateAccountTests"/>
+        </classes>
+    </test>
+    <test name="Purchase Tests">
+        <classes>
+            <class name="tests.PurchaseTests"/>
         </classes>
     </test>
 </suite>

@@ -1,9 +1,13 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
+
+import java.util.regex.Pattern;
 
 public class ContactPage extends BasePage {
     //**********Constructor**********
@@ -68,8 +72,9 @@ public class ContactPage extends BasePage {
         uploadFile(chooseFileButton, filePath);
     }
 
-    public void verifyUploadedFile(String fileName) throws InterruptedException {
-        Thread.sleep(400);
+    public void verifyUploadedFile(String fileName) {
+        Pattern pattern = Pattern.compile("^" + fileName + "$");
+        wait.until(ExpectedConditions.textMatches(By.className("filename"), pattern));
         Assert.assertTrue(readText(fileUploadConfirmation).matches(fileName));
     }
 }
