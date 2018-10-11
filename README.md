@@ -9,12 +9,12 @@ Project contains tests of [fake e-commerce site](http://automationpractice.com/i
 3. TestNG 6.14.3
 
 ## Test
-Tested on ChromeDriver 2.38.552522
+Tested on ChromeDriver 2.42.591088
 
 
 ### Requirements
 To execute all tests successfully you need to:
-- Put ChromeDriver.exe into project root directory
+- Set WebDriver in BaseTest.class -> setup()
 - Create file testFile.txt in directory C:\testFile.txt
 - or to change directory and file name in ContactTest.class -> validFileUpload()
 
