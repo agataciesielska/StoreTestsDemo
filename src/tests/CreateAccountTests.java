@@ -9,7 +9,7 @@ import pages.MyAccountPage;
 
 public class CreateAccountTests extends BaseTest {
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void beforeCreateNewAccountMethods() {
         page.GetInstance(MainPage.class).goToLoginPage();
     }
@@ -22,7 +22,7 @@ public class CreateAccountTests extends BaseTest {
         page.GetInstance(LoginPage.class).verifyInvalidCreateAccount("Invalid email address.");
     }
 
-    @Test
+    @Test(groups = {"smoke tests"})
     public void validCreateAccount() {
         page.GetInstance(LoginPage.class).createAccountEmail(7);
         String email = page.GetInstance(LoginPage.class).getEmailAddress();

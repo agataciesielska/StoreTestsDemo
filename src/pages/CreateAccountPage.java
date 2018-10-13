@@ -16,12 +16,6 @@ public class CreateAccountPage extends BasePage {
 
     //**********Page Variables**********
     //**********Web Elements**********
-    @FindBy(id = "id_gender1")
-    WebElement mrTitleRadioButton;
-
-    @FindBy(id = "id_gender2")
-    WebElement mrsTitleRadioButton;
-
     @FindBy(id = "customer_firstname")
     WebElement personalInformationFirstNameField;
 
@@ -33,21 +27,6 @@ public class CreateAccountPage extends BasePage {
 
     @FindBy(id = "passwd")
     WebElement personalInformationPasswordField;
-
-    @FindBy(id = "days")
-    WebElement dateOfBirthDaySelect;
-
-    @FindBy(id = "months")
-    WebElement dateOfBirthMonthSelect;
-
-    @FindBy(id = "years")
-    WebElement dateOfBirthYearSelect;
-
-    @FindBy(id = "newsletter")
-    WebElement newsletterCheckbox;
-
-    @FindBy(id = "optin")
-    WebElement specialOffersCheckbox;
 
     @FindBy(id = "firstname")
     WebElement addressFirstNameField;
@@ -89,14 +68,6 @@ public class CreateAccountPage extends BasePage {
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("id_gender1")));
 
-//        if (title.equalsIgnoreCase("mrs")) {
-//            click(mrsTitleRadioButton);
-//        }
-//
-//        if (title.equalsIgnoreCase("mr")) {
-//            click(mrTitleRadioButton);
-//        }
-
         clearTextField(personalInformationFirstNameField);
         writeText(personalInformationFirstNameField, personalInformationFirstName);
 
@@ -109,18 +80,6 @@ public class CreateAccountPage extends BasePage {
         clearTextField(personalInformationPasswordField);
         writeText(personalInformationPasswordField, password);
 
-//        selectFromDropdownListByValue(dateOfBirthDaySelect, birthDay);
-//        selectFromDropdownListByValue(dateOfBirthMonthSelect, birthMonth);
-//        selectFromDropdownListByValue(dateOfBirthYearSelect, birthYear);
-
-//        if (selectNewsletter) {
-//            click(newsletterCheckbox);
-//        }
-//
-//        if (selectSpecialOffers) {
-//            click(specialOffersCheckbox);
-//        }
-
         clearTextField(addressFirstNameField);
         writeText(addressFirstNameField, addressFirstName);
 
@@ -132,7 +91,6 @@ public class CreateAccountPage extends BasePage {
 
         clearTextField(addressCityField);
         writeText(addressCityField, addressCity);
-
 
         selectFromDropdownListByValue(addressStateSelect, state);
 

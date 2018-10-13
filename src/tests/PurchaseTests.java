@@ -2,28 +2,33 @@ package tests;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pages.*;
+import pages.CartPage;
+import pages.MainPage;
+import pages.OrderConfirmationPage;
+import pages.OrderShippingPage;
 
 public class PurchaseTests extends BaseTest {
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void beforePurchaseTestMethods() {
-        page.GetInstance(MainPage.class).goToLoginPage();
-        page.GetInstance(LoginPage.class).loginToAccount("testmail@mymail.com", "12345qw");
-        page.GetInstance(MyAccountPage.class).goToMainPage();
-        page.GetInstance(MainPage.class).goToProductPage();
+        page.GetInstance(MainPage.class)
+                .goToLoginPage() //to LoginPage
+                .loginToAccount("testmail@mymail.com", "12345qw") //to MyAccountPage
+                .goToMainPage() //to MainPage
+                .goToProductPage() //to ProductPage
+                .addToCart("2", "2"); //to CartPage
     }
 
-    @Test
+    @Test(groups = {"smoke tests"})
     public void validPurchase() {
         //Pages order in placing an order:
         //ProductPage -> CartPage -> OrderAddressPage -> OrderShippingPage -> OrderPaymentPage -> OrderSummaryPage -> OrderConfirmationPage
-        page.GetInstance(ProductPage.class).addToCart("2", "2");
-        page.GetInstance(CartPage.class).clickProceedToCheckoutButton();
-        page.GetInstance(OrderAddressPage.class).clickProceedToCheckoutButton();
-        page.GetInstance(OrderShippingPage.class).acceptTermsAndProceedToCheckout();
-        page.GetInstance(OrderPaymentPage.class).clickPayByBankWireButton();
-        page.GetInstance(OrderSummaryPage.class).clickIConfirmMyOrderButton();
+        page.GetInstance(CartPage.class)
+                .clickProceedToCheckoutButton() //to OrderAddressPage
+                .clickProceedToCheckoutButton() //to OrderShippingPage
+                .acceptTermsAndProceedToCheckout() //to OrderPaymentPage
+                .clickPayByBankWireButton() //to OrderSummaryPage
+                .clickIConfirmMyOrderButton(); //to OrderConfirmationPage
 
         //**********Assertions**********
         page.GetInstance(OrderConfirmationPage.class).confirmValidOrder("Your order on My Store is complete.");
@@ -31,7 +36,6 @@ public class PurchaseTests extends BaseTest {
 
     @Test
     public void removeFromCart() {
-        page.GetInstance(ProductPage.class).addToCart("2", "2");
         page.GetInstance(CartPage.class).clickRemoveItemButton();
 
         //**********Assertions**********
@@ -40,7 +44,6 @@ public class PurchaseTests extends BaseTest {
 
     @Test
     public void decreaseItemQuantityInCart() {
-        page.GetInstance(ProductPage.class).addToCart("2", "2");
         page.GetInstance(CartPage.class).clickReduceQuantityButton();
 
         //**********Assertions**********
@@ -49,7 +52,6 @@ public class PurchaseTests extends BaseTest {
 
     @Test
     public void increaseItemQuantityInCart() {
-        page.GetInstance(ProductPage.class).addToCart("2", "2");
         page.GetInstance(CartPage.class).clickIncreaseQuantityButton();
 
         //**********Assertions**********
@@ -58,10 +60,10 @@ public class PurchaseTests extends BaseTest {
 
     @Test
     public void invalidPurchase_TermsNotAccepted() {
-        page.GetInstance(ProductPage.class).addToCart("2", "2");
-        page.GetInstance(CartPage.class).clickProceedToCheckoutButton();
-        page.GetInstance(OrderAddressPage.class).clickProceedToCheckoutButton();
-        page.GetInstance(OrderShippingPage.class).clickProceedToCheckout();
+        page.GetInstance(CartPage.class)
+                .clickProceedToCheckoutButton() //to OrderAddressPage
+                .clickProceedToCheckoutButton() //to OrderShippingPage
+                .clickProceedToCheckout(); //to OrderPaymentPage
 
         //**********Assertions**********
         page.GetInstance(OrderShippingPage.class).verifyInvalidPurchase_TermsNotAccepted();

@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
@@ -32,8 +33,9 @@ public class CartPage extends BasePage {
     @FindBy(css = ".alert-warning")
     WebElement cartIsEmptyMessage;
     //**********Methods**********
-    public void clickProceedToCheckoutButton() {
+    public OrderAddressPage clickProceedToCheckoutButton() {
         click(proceedToCheckoutButton);
+        return new PageFactory().initElements(driver, OrderAddressPage.class);
     }
 
     public void clickRemoveItemButton() {
@@ -48,10 +50,10 @@ public class CartPage extends BasePage {
         click(increaseQuantityButton);
     }
 
-    public String getQuantity() {
-        String quantity = cartItemQuantity.getAttribute("value");
-        return quantity;
-    }
+//    public String getQuantity() {
+//        String quantity = cartItemQuantity.getAttribute("value");
+//        return quantity;
+//    }
     //**********Assertions**********
     public void removeFromCartConfirmation(String expectedText) {
         wait.until(ExpectedConditions.visibilityOf(cartIsEmptyMessage));

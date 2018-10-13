@@ -7,7 +7,7 @@ import pages.MainPage;
 
 public class ContactTests extends BaseTest {
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void beforeContactTestMethods() {
         page.GetInstance(MainPage.class).goToContactPage();
     }

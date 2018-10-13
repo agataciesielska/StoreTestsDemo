@@ -16,7 +16,7 @@ public class BaseTest {
     public WebDriverWait wait;
     public PageGenerator page;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void setup() {
         driver = new ChromeDriver();
         wait = new WebDriverWait(driver, 15);
@@ -26,7 +26,7 @@ public class BaseTest {
         page.GetInstance(MainPage.class).goToMainPage();
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void teardown() throws InterruptedException {
         Thread.sleep(1000);
         driver.quit();

@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
@@ -23,9 +24,10 @@ public class OrderShippingPage extends BasePage {
     WebElement acceptTermErrorMessage;
 
     //**********Methods**********
-    public void acceptTermsAndProceedToCheckout() {
+    public OrderPaymentPage acceptTermsAndProceedToCheckout() {
         click(termsAgreeCheckbox);
         click(proceedToCheckoutButton);
+        return new PageFactory().initElements(driver, OrderPaymentPage.class);
     }
 
     public void clickProceedToCheckout() {

@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class ProductPage extends BasePage {
@@ -25,16 +26,18 @@ public class ProductPage extends BasePage {
     @FindBy(css = ".button-medium span")
     WebElement proceedToCheckoutPopupButton;
     //**********Methods**********
-    public void addToCart(String quantity, String value) {
+    public CartPage addToCart(String quantity, String sizeValue) {
         clearTextField(quantityField);
         writeText(quantityField, quantity);
 
-        selectFromDropdownListByValue(selectSize, value);
+        selectFromDropdownListByValue(selectSize, sizeValue);
 
         click(addToCartButton);
 
         wait.until(ExpectedConditions.visibilityOf(proceedToCheckoutPopupButton));
         click(proceedToCheckoutPopupButton);
+
+        return new PageFactory().initElements(driver, CartPage.class);
     }
     //**********Assertions**********
 }

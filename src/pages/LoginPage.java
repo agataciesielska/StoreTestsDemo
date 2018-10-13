@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
@@ -42,12 +43,14 @@ public class LoginPage extends BasePage{
     WebElement createAccountErrorMessage;
 
     //**********Methods**********
-    public void loginToAccount (String uemail, String upassword) {
+    public MyAccountPage loginToAccount (String uemail, String upassword) {
         clearTextField(loginEmailField);
         writeText(loginEmailField, uemail);
         clearTextField(loginPasswordField);
         writeText(loginPasswordField, upassword);
         click(loginButton);
+
+        return new PageFactory().initElements(driver, MyAccountPage.class);
     }
 
     public void verifyValidLogin(String expectedText) {

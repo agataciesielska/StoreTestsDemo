@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class OrderAddressPage extends BasePage {
     //**********Constructor**********
@@ -17,8 +18,9 @@ public class OrderAddressPage extends BasePage {
     @FindBy(css = "textarea")
     WebElement commentField;
     //**********Methods**********
-    public void clickProceedToCheckoutButton() {
+    public OrderShippingPage clickProceedToCheckoutButton() {
         click(proceedToCheckoutButton);
+        return new PageFactory().initElements(driver, OrderShippingPage.class);
     }
     //**********Assertions**********
 }

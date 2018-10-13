@@ -7,12 +7,12 @@ import pages.MainPage;
 
 public class LoginTests extends BaseTest {
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void beforeLoginTestMethods() {
         page.GetInstance(MainPage.class).goToLoginPage();
     }
 
-    @Test
+    @Test(groups = {"smoke tests"})
     public void validLoginTest() {
         page.GetInstance(LoginPage.class).loginToAccount("testmail@mymail.com", "12345qw");
 
