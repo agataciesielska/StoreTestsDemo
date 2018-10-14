@@ -9,30 +9,46 @@ public class LoginTests extends BaseTest {
 
     @BeforeMethod(alwaysRun = true)
     public void beforeLoginTestMethods() {
+        // When
         page.GetInstance(MainPage.class).goToLoginPage();
     }
 
     @Test(groups = {"smoke tests"})
     public void validLoginTest() {
-        page.GetInstance(LoginPage.class).loginToAccount("testmail@mymail.com", "12345qw");
+        // Given
+        String loginEmail = "testmail@mymail.com";
+        String loginPassword = "12345qw";
 
-        //**********Assertions**********
+        // When
+        page.GetInstance(LoginPage.class).loginToAccount(loginEmail, loginPassword);
+
+        // Then
         page.GetInstance(LoginPage.class).verifyValidLogin("Welcome to your account. Here you can manage all of your personal information and orders.");
     }
 
     @Test
     public void invalidLoginTest_EmptyEmail() {
-        page.GetInstance(LoginPage.class).loginToAccount("", "password");
+        // Given
+        String loginEmail = "";
+        String loginPassword = "12345qw";
 
-        //**********Assertions**********
+        // When
+        page.GetInstance(LoginPage.class).loginToAccount(loginEmail, loginPassword);
+
+        // Then
         page.GetInstance(LoginPage.class).verifyInvalidLogin("An email address required.");
     }
 
     @Test
     public void invalidLoginTest_EmptyPassword() {
-        page.GetInstance(LoginPage.class).loginToAccount("testmail@mymail.com", "");
+        // Given
+        String loginEmail = "testmail@mymail.com";
+        String loginPassword = "";
 
-        //**********Assertions**********
+        // When
+        page.GetInstance(LoginPage.class).loginToAccount(loginEmail, loginPassword);
+
+        // Then
         page.GetInstance(LoginPage.class).verifyInvalidLogin("Password is required.");
     }
 }
