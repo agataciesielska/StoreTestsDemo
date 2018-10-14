@@ -75,9 +75,11 @@ public class ContactTests extends BaseTest {
 
     @Test
     public void validFileUpload() {
+        // Given
         String filePath = "C:\\testFile.txt";
         String fileName = "testFile.txt";
 
+        // When
         page.GetInstance(ContactPage.class).fileUpload(filePath);
 
         // Then
