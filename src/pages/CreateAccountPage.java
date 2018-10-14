@@ -1,11 +1,11 @@
 package pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
+import utilities.CreateAccountData;
 
 public class CreateAccountPage extends BasePage {
 
@@ -15,6 +15,21 @@ public class CreateAccountPage extends BasePage {
     }
 
     //**********Page Variables**********
+    public static CreateAccountData createAccountData = new CreateAccountData(
+            "Testfirstname",
+            "Testlastname",
+            LoginPage.emailAddress,
+            "Testpassword",
+            "Testfirstname",
+            "Testlastname",
+            "Teststreet 123",
+            "Testcity",
+            "5",
+            "12345",
+            "21",
+            "0987654321",
+            "Testalias");
+
     //**********Web Elements**********
     @FindBy(id = "customer_firstname")
     WebElement personalInformationFirstNameField;
@@ -62,51 +77,114 @@ public class CreateAccountPage extends BasePage {
     WebElement errorMessage;
 
     //**********Methods**********
-    public void createAccount(String personalInformationFirstName, String personalInformationLastName,
-                              String personalInformationEmail, String password, String addressFirstName, String addressLastName,
-                              String addressAddress, String addressCity, String state, String postcode, String country, String phoneNumber, String addressAlias) {
+    // Working method:
+//    public void createAccount(String personalInformationFirstName, String personalInformationLastName,
+//                              String personalInformationEmail, String password, String addressFirstName, String addressLastName,
+//                              String addressAddress, String addressCity, String state, String postcode, String country, String phoneNumber, String addressAlias) {
+//
+//        wait.until(ExpectedConditions.visibilityOf(personalInformationFirstNameField));
+//
+//        clearTextField(personalInformationFirstNameField);
+//        writeText(personalInformationFirstNameField, personalInformationFirstName);
+//
+//        clearTextField(personalInformationLastNameField);
+//        writeText(personalInformationLastNameField, personalInformationLastName);
+//
+//        clearTextField(personalInformationEmailField);
+//        writeText(personalInformationEmailField, personalInformationEmail);
+//
+//        clearTextField(personalInformationPasswordField);
+//        writeText(personalInformationPasswordField, password);
+//
+//        clearTextField(addressFirstNameField);
+//        writeText(addressFirstNameField, addressFirstName);
+//
+//        clearTextField(addressLastNameField);
+//        writeText(addressLastNameField, addressLastName);
+//
+//        clearTextField(addressAddressField);
+//        writeText(addressAddressField, addressAddress);
+//
+//        clearTextField(addressCityField);
+//        writeText(addressCityField, addressCity);
+//
+//        selectFromDropdownListByValue(addressStateSelect, state);
+//
+//        clearTextField(addressPostcodeField);
+//        writeText(addressPostcodeField, postcode);
+//
+//        selectFromDropdownListByValue(addressCountrySelect, country);
+//
+//        clearTextField(addressMobilePhoneField);
+//        writeText(addressMobilePhoneField, phoneNumber);
+//
+//        clearTextField(addressAliasField);
+//        writeText(addressAliasField, addressAlias);
+//
+//        click(registerButton);
+//    }
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("id_gender1")));
+    public void createAccount() {
+
+        wait.until(ExpectedConditions.visibilityOf(personalInformationFirstNameField));
 
         clearTextField(personalInformationFirstNameField);
-        writeText(personalInformationFirstNameField, personalInformationFirstName);
+        writeText(personalInformationFirstNameField, createAccountData.getPersonalInformationFirstName());
 
         clearTextField(personalInformationLastNameField);
-        writeText(personalInformationLastNameField, personalInformationLastName);
+        writeText(personalInformationLastNameField, createAccountData.getPersonalInformationLastName());
 
         clearTextField(personalInformationEmailField);
-        writeText(personalInformationEmailField, personalInformationEmail);
+        writeText(personalInformationEmailField, createAccountData.getPersonalInformationEmail());
 
         clearTextField(personalInformationPasswordField);
-        writeText(personalInformationPasswordField, password);
+        writeText(personalInformationPasswordField, createAccountData.getPassword());
 
         clearTextField(addressFirstNameField);
-        writeText(addressFirstNameField, addressFirstName);
+        writeText(addressFirstNameField, createAccountData.getAddressFirstName());
 
         clearTextField(addressLastNameField);
-        writeText(addressLastNameField, addressLastName);
+        writeText(addressLastNameField, createAccountData.getAddressLastName());
 
         clearTextField(addressAddressField);
-        writeText(addressAddressField, addressAddress);
+        writeText(addressAddressField, createAccountData.getAddressAddress());
 
         clearTextField(addressCityField);
-        writeText(addressCityField, addressCity);
+        writeText(addressCityField, createAccountData.getAddressCity());
 
-        selectFromDropdownListByValue(addressStateSelect, state);
+        selectFromDropdownListByValue(addressStateSelect, createAccountData.getState());
 
         clearTextField(addressPostcodeField);
-        writeText(addressPostcodeField, postcode);
+        writeText(addressPostcodeField, createAccountData.getPostcode());
 
-        selectFromDropdownListByValue(addressCountrySelect, country);
+        selectFromDropdownListByValue(addressCountrySelect, createAccountData.getCountry());
 
         clearTextField(addressMobilePhoneField);
-        writeText(addressMobilePhoneField, phoneNumber);
+        writeText(addressMobilePhoneField, createAccountData.getPhoneNumber());
 
         clearTextField(addressAliasField);
-        writeText(addressAliasField, addressAlias);
+        writeText(addressAliasField, createAccountData.getAddressAlias());
 
         click(registerButton);
     }
+
+//    public static CreateAccountData createAccountData() {
+//        return new CreateAccountData.Builder()
+//                .personalInformationFirstName("Testfirstname")
+//                .personalInformationLastName("Testlastname")
+//                .personalInformationEmail(LoginPage.emailAddress)
+//                .password("Testpassword")
+//                .addressFirstName("Testfirstname")
+//                .addressLastName("Testlastname")
+//                .addressAddress("Teststreet 123")
+//                .addressCity("Testcity")
+//                .state("5")
+//                .postcode("12345")
+//                .country("21")
+//                .phoneNumber("0987654321")
+//                .addressAlias("Testalias")
+//                .build();
+//    }
 
     //**********Assertions**********
     public void verifyInvalidCreateAccount(String expectedText) {
